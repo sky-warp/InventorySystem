@@ -1,3 +1,5 @@
+using _Project.Scripts.Configs;
+using _Project.Scripts.Model;
 using UnityEngine;
 
 namespace _Project.Scripts.Infrastructure
@@ -9,8 +11,10 @@ namespace _Project.Scripts.Infrastructure
 
         private void Update()
         {
-            if(_armorParent.childCount == 0)
+            if (_armorParent.childCount == 0)
+            {
                 Instantiate(_armorPrefab, _armorParent);
+            }
         }
     }
 }
