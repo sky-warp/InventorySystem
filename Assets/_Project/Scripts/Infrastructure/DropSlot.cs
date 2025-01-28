@@ -9,8 +9,8 @@ namespace _Project.Scripts.Infrastructure
     public class DropSlot : MonoBehaviour, IDropHandler
     {
         public event Action<Item> OnDropped;
-        public event Action OnNoFreeSpace;
-        public event Action<DropSlot, PointerEventData> OnSlotFull;
+        public event Action NoFreeSpaceDetected;
+        public event Action<DropSlot, PointerEventData> OnSlotFullDetected;
 
         public GameObject DroppedItemPosition { get; private set; }
 
@@ -29,7 +29,7 @@ namespace _Project.Scripts.Infrastructure
             if (_presenter_.InventoryModel.CurrentWeight + droppedItem.NewItem.Weight >
                 _presenter_.InventoryModel.MaxWeight && !droppedItem.NewItem.IsUsed)
             {
-                OnNoFreeSpace?.Invoke();
+                NoFreeSpaceDetected?.Invoke();
             }
 
             else if (gameObject.transform.childCount > 0)
@@ -49,7 +49,7 @@ namespace _Project.Scripts.Infrastructure
                          holdingItem.StackAmount + droppedItem.StackAmount > holdingItem.NewItem.MaxStackValue &&
                          !droppedItem.NewItem.IsUsed)
                 {
-                    OnSlotFull?.Invoke(this.gameObject.GetComponent<DropSlot>(), eventData);
+                    OnSlotFullDetected?.Invoke(this.gameObject.GetComponent<DropSlot>(), eventData);
                 }
             }
             else

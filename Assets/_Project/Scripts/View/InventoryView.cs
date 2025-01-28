@@ -29,8 +29,8 @@ namespace _Project.Scripts.View
             {
                 slot.Init(_inventoryPresenter);
                 slot.OnDropped += OnItemDrop;
-                slot.OnNoFreeSpace += ShowNoSpaceMessage;
-                slot.OnSlotFull += OnFullSlotDropped;
+                slot.NoFreeSpaceDetected += ShowNoSpaceDetectedMessage;
+                slot.OnSlotFullDetected += OnFullDetectedSlotDropped;
             }
 
             _deleteSlot.OnDeleteDropped += OnDeleteItemDropped;
@@ -46,7 +46,7 @@ namespace _Project.Scripts.View
             _currentWeightText.text = $"Current weight: {currentWeight}";
         }
 
-        public void OnFullSlotDropped(DropSlot fullSlot, PointerEventData eventData)
+        public void OnFullDetectedSlotDropped(DropSlot fullSlot, PointerEventData eventData)
         {
             if (_inventorySlots.Contains(fullSlot))
             {
@@ -69,12 +69,7 @@ namespace _Project.Scripts.View
                             }
                             else
                             {
-                                if (_inventorySlots[j].gameObject.transform.childCount == 0)
-                                {
-                                    _inventorySlots[j].OnDrop(eventData);
-                                    break;
-                                }
-                                else if (_inventorySlots[j + 1].gameObject.transform.childCount == 0)
+                                if (_inventorySlots[j + 1].gameObject.transform.childCount == 0)
                                 {
                                     _inventorySlots[j + 1].OnDrop(eventData);
                                     break;
@@ -96,7 +91,7 @@ namespace _Project.Scripts.View
             _inventoryPresenter.RemoveItemFromInventory(item);
         }
 
-        private void ShowNoSpaceMessage()
+        private void ShowNoSpaceDetectedMessage()
         {
             _noSpaceOject.SetActive(true);
         }
