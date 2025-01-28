@@ -1,6 +1,8 @@
 using _Project.Scripts.Configs;
 using _Project.Scripts.Model;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 namespace _Project.Scripts.Infrastructure
@@ -9,7 +11,12 @@ namespace _Project.Scripts.Infrastructure
     {
         public Item NewItem { get; private set; }
         
-        [SerializeField] ItemData _itemConfig;
+        [SerializeField] private ItemData _itemConfig;
+        [SerializeField] private Image _itemImage;
+        [SerializeField] private TextMeshProUGUI _stackText;
+        public int StackAmount { get; private set; } = 1;
+        
+        public ItemData ItemConfig => _itemConfig;
         
         private Canvas _mainCanvas;
         private RectTransform _rectTransform;
@@ -21,6 +28,8 @@ namespace _Project.Scripts.Infrastructure
             _canvasGroup = GetComponent<CanvasGroup>();
             _mainCanvas = GetComponentInParent<Canvas>();
 
+            _itemImage.sprite = _itemConfig.Icon;
+            
             NewItem = new Item(_itemConfig);
         }
 
@@ -40,6 +49,15 @@ namespace _Project.Scripts.Infrastructure
         {
             eventData.pointerDrag.transform.localPosition = Vector3.zero;
             _canvasGroup.blocksRaycasts = true;
+        }
+
+        public void IncreaseStack(int stackValue)
+        {
+            if (StackAmount + stackValue <= NewItem.MaxStackValue)
+            {
+                StackAmount += stackValue;
+                _stackText.text = StackAmount.ToString();
+            }
         }
     }
 }

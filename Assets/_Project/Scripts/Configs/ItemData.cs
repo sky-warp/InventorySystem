@@ -6,6 +6,7 @@ namespace _Project.Scripts.Configs
     public class ItemData : ScriptableObject
     {
         [field: SerializeField] public int Weight { get; private set; }
+        [field: SerializeField] public int MaxStackValue { get; private set; }
         [field: SerializeField] public Sprite Icon { get; private set; }
     }
 }

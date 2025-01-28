@@ -8,14 +8,17 @@ namespace _Project.Scripts.Infrastructure
     public class DeleteItem : MonoBehaviour, IDropHandler
     {
         public event Action<Item> OnDeleteDropped;
-        
+
         public void OnDrop(PointerEventData eventData)
         {
             var droppedItem = eventData.pointerDrag.gameObject;
-            Destroy(droppedItem);
-            
             var itemToDelete = droppedItem.gameObject.GetComponent<DragItem>();
-            OnDeleteDropped?.Invoke(itemToDelete.NewItem);
+
+            if (itemToDelete.NewItem.IsUsed)
+            {
+                Destroy(droppedItem);
+                OnDeleteDropped?.Invoke(itemToDelete.NewItem);
+            }
         }
     }
 }

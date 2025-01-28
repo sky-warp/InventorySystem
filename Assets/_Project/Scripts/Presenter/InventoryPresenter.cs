@@ -1,29 +1,39 @@
+using System;
 using _Project.Scripts.Model;
-using _Project.Scripts.View;
+using UnityEngine;
 
 namespace _Project.Scripts.Presenter
 {
     public class InventoryPresenter
     {
-        private ItemModel _itemModel;
+        public Action OnNoInventorySpace;
+        
+        private InventoryModel _inventoryModel;
+        public InventoryModel InventoryModel => _inventoryModel;
 
-        public InventoryPresenter(ItemModel itemModel)
+        public InventoryPresenter(InventoryModel inventoryModel)
         {
-            _itemModel = itemModel;
+            _inventoryModel = inventoryModel;
         }
 
         public void AddItemToInventory(Item item)
         {
-            if (!item.IsUsed)
+            if(item.IsUsed)
+                return;
+            
+            if (!item.IsUsed && !(_inventoryModel.CurrentWeight + item.Weight > _inventoryModel.MaxWeight))
             {
-                _itemModel.AddItem(item);
+                _inventoryModel.AddItem(item);
                 item.InInventory();
             }
+            
+            /*else
+                OnNoInventorySpace?.Invoke();*/
         }
 
         public void RemoveItemFromInventory(Item item)
         {
-            _itemModel.RemoveItem(item);
+            _inventoryModel.RemoveItem(item);
         }
     }
 }

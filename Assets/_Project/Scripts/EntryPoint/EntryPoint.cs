@@ -11,7 +11,7 @@ namespace _Project.Scripts.EntryPoint
         
         private void Start()
         {
-            ItemModel model = new ItemModel(_inventoryView);
+            InventoryModel model = new InventoryModel(_inventoryView);
             InventoryPresenter presenter = new InventoryPresenter(model);
             _inventoryView.Init(presenter);
         }

@@ -6,12 +6,18 @@ namespace _Project.Scripts.Model
     [Serializable]
     public class Item
     {
-        public ItemData ItemConfig { get; private set; }
         public bool IsUsed { get; private set; }
+
+        private int _weight;
+        private int _maxStackValue;
+
+        public int Weight => _weight;
+        public int MaxStackValue => _maxStackValue;
 
         public Item(ItemData congif)
         {
-            ItemConfig = congif;
+            _weight = congif.Weight;
+            _maxStackValue = congif.MaxStackValue;
         }
 
         public void InInventory()
@@ -19,9 +25,9 @@ namespace _Project.Scripts.Model
             IsUsed = true;
         }
 
-        /*public void OutInventory()
+        public void StackWeight(int weight)
         {
-            IsUsed = false;
-        }*/
+            _weight += weight;
+        }
     }
 }
