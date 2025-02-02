@@ -3,7 +3,6 @@ using _Project.Scripts.Equip.Presenter;
 using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Inventory.View;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _Project.Scripts.Equip.View
 {

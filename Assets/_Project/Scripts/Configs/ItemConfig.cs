@@ -2,8 +2,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.Configs
 {
-    [CreateAssetMenu(fileName = "ItemData", menuName = "Create New Item/Item")]
-    public class ItemConfig : ScriptableObject
+    public abstract class ItemConfig : ScriptableObject
     {
         [field: SerializeField] public string Type { get; private set; }
         [field: SerializeField] public string Name { get; private set; }

@@ -67,10 +67,6 @@ namespace _Project.Scripts.Infrastructure
                     }
                 }
             }
-            else
-            {
-                Debug.Log("Add item to inventory before equip");
-            }
         }
     }
 }

@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 2018883125350834264}
   - component: {fileID: 8031506582621412232}
   m_Layer: 0
-  m_Name: WeaponItem
+  m_Name: FlaskItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e995ef17dffd81d4c85387d25c92b5cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemConfig: {fileID: 11400000, guid: 2173530dfc096c64998eb4daf0efc1e2, type: 2}
+  _itemConfig: {fileID: 11400000, guid: d0557ed0d102ece41bfaf52aaad61aac, type: 2}
   _itemImage: {fileID: 3811794240292541545}
   _stackText: {fileID: 4622132832303408270}
 --- !u!225 &8031506582621412232

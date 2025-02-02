@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e995ef17dffd81d4c85387d25c92b5cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemConfig: {fileID: 11400000, guid: fe5a8b6c72708ed44b93cc1cf09395cb, type: 2}
+  _itemConfig: {fileID: 11400000, guid: 85824bfb49d03ab49a75daec574d4c27, type: 2}
   _itemImage: {fileID: 3811794240292541545}
   _stackText: {fileID: 4622132832303408270}
 --- !u!225 &8031506582621412232
