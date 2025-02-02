@@ -1,5 +1,5 @@
 using System;
-using _Project.Scripts.Model;
+using _Project.Scripts.Inventory.Model;
 using UnityEngine;
 using UnityEngine.EventSystems;
 

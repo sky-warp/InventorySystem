@@ -1,6 +1,6 @@
 using System;
-using _Project.Scripts.Model;
-using _Project.Scripts.Presenter;
+using _Project.Scripts.Inventory.Model;
+using _Project.Scripts.Inventory.Presenter;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -11,9 +11,7 @@ namespace _Project.Scripts.Infrastructure
         public event Action<Item> OnDropped;
         public event Action NoFreeSpaceDetected;
         public event Action<DropSlot, PointerEventData> OnSlotFullDetected;
-
-        public GameObject DroppedItemPosition { get; private set; }
-
+        
         private InventoryPresenter _presenter_;
 
         public void Init(InventoryPresenter presenter)
@@ -23,8 +21,7 @@ namespace _Project.Scripts.Infrastructure
 
         public void OnDrop(PointerEventData eventData)
         {
-            DroppedItemPosition = eventData.pointerDrag.gameObject;
-            var droppedItem = DroppedItemPosition.gameObject.GetComponent<DragItem>();
+            DragItem droppedItem = eventData.pointerDrag.gameObject.GetComponent<DragItem>();
 
             if (_presenter_.InventoryModel.CurrentWeight + droppedItem.NewItem.Weight >
                 _presenter_.InventoryModel.MaxWeight && !droppedItem.NewItem.IsUsed)
@@ -59,8 +56,8 @@ namespace _Project.Scripts.Infrastructure
                     OnDropped?.Invoke(droppedItem.NewItem);
                 }
 
-                DroppedItemPosition.transform.SetParent(transform);
-                DroppedItemPosition.transform.localPosition = Vector3.zero;
+                droppedItem.transform.SetParent(transform);
+                droppedItem.transform.localPosition = Vector3.zero;
             }
         }
     }

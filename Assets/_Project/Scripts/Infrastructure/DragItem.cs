@@ -1,5 +1,5 @@
 using _Project.Scripts.Configs;
-using _Project.Scripts.Model;
+using _Project.Scripts.Inventory.Model;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,12 +11,12 @@ namespace _Project.Scripts.Infrastructure
     {
         public Item NewItem { get; private set; }
         
-        [SerializeField] private ItemData _itemConfig;
+        [SerializeField] private ItemConfig _itemConfig;
         [SerializeField] private Image _itemImage;
         [SerializeField] private TextMeshProUGUI _stackText;
         public int StackAmount { get; private set; } = 1;
         
-        public ItemData ItemConfig => _itemConfig;
+        public ItemConfig ItemConfig => _itemConfig;
         
         private Canvas _mainCanvas;
         private RectTransform _rectTransform;
@@ -58,6 +58,18 @@ namespace _Project.Scripts.Infrastructure
                 StackAmount += stackValue;
                 _stackText.text = StackAmount.ToString();
             }
+        }
+
+        public void DecreaseStackOnEquip(int valueToDecrease)
+        {
+            StackAmount = 1;
+            
+            _stackText.text = StackAmount.ToString();
+        }
+
+        public void ReturnStackAfterEquip(int stackAmount)
+        {
+            StackAmount = stackAmount - 1;
         }
     }
 }
