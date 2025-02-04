@@ -30,7 +30,7 @@ namespace _Project.Scripts.Equip.View
             }
         }
 
-        private void OnSlotEquipped(string itemType ,string itemName)
+        private void OnSlotEquipped(string itemType, string itemName)
         {
             Transform spawnPoint = (itemType == "Armor") ? _armorSpawnPoint : _weaponSpawnPoint;
             _equipPresenter.EquipItem(itemName, spawnPoint);
@@ -57,15 +57,7 @@ namespace _Project.Scripts.Equip.View
 
         private void OnFreeSlotPut(GameObject itemToReturnToInventory)
         {
-            _equipPresenter.ReturnToFreeSlot( GetRandomSlot(), itemToReturnToInventory);
+            _equipPresenter.ReturnToFreeSlot(GetRandomSlot(), itemToReturnToInventory);
         }
-
-        /*private void OnRemainStackBackToInventory(GameObject itemToReturnToInventory, int stackAmount)
-        {
-            var tempItem = Instantiate(itemToReturnToInventory, GetRandomSlot().gameObject.transform);
-            itemToReturnToInventory.GetComponent<DragItem>().ReturnStackAfterEquip(stackAmount);
-            _equipPresenter.ReturnToFreeSlot( GetRandomSlot(), tempItem);
-            
-        }*/
     }
 }

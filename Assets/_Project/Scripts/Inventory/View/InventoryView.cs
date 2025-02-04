@@ -15,10 +15,13 @@ namespace _Project.Scripts.Inventory.View
         [SerializeField] private TextMeshProUGUI _currentWeightText;
         [SerializeField] private TextMeshProUGUI _maxWeightText;
         [SerializeField] private GameObject _noSpaceOject;
+        [SerializeField] private ActionMenu _actionMenu;
 
         public List<DropSlot> InventorySlots => _inventorySlots;
-        
+
         private InventoryPresenter _inventoryPresenter;
+        private DragItem _itemToUseInstance;
+        private GameObject _actionMenuInstance;
 
         public void Init(InventoryPresenter inventoryPresenter)
         {
@@ -33,6 +36,7 @@ namespace _Project.Scripts.Inventory.View
                 slot.OnDropped += OnItemDrop;
                 slot.NoFreeSpaceDetected += ShowNoSpaceDetectedMessage;
                 slot.OnSlotFullDetected += OnFullDetectedSlotDropped;
+                slot.OnUsableItemClicked += OnUsableItemClick;
             }
 
             _deleteSlot.OnDeleteDropped += OnDeleteItemDropped;
@@ -47,7 +51,7 @@ namespace _Project.Scripts.Inventory.View
         {
             _currentWeightText.text = $"Current weight: {currentWeight}";
         }
-        
+
         public void OnFullDetectedSlotDropped(DropSlot fullSlot, PointerEventData eventData)
         {
             if (_inventorySlots.Contains(fullSlot))
@@ -88,14 +92,39 @@ namespace _Project.Scripts.Inventory.View
             _inventoryPresenter.AddItemToInventory(item);
         }
 
-        private void OnDeleteItemDropped(Item item)
+        private void OnDeleteItemDropped(DragItem item)
         {
-            _inventoryPresenter.RemoveItemFromInventory(item);
+            _inventoryPresenter.RemoveItemFromInventory(item, item.StackAmount);
         }
 
         private void ShowNoSpaceDetectedMessage()
         {
             _noSpaceOject.SetActive(true);
+        }
+        
+        private void OnUsableItemClick(Transform clickedItemPosition, DragItem itemToUse)
+        {
+            _itemToUseInstance = itemToUse;
+
+            if (_actionMenuInstance != null)
+            {
+                _inventoryPresenter.DestroyActionMenu(_actionMenuInstance.gameObject);
+            }
+
+            _actionMenuInstance = Instantiate(_actionMenu.gameObject, clickedItemPosition);
+            _actionMenuInstance.gameObject.GetComponent<ActionMenu>().CloseActionMenuButton.onClick.AddListener(OnCloseActionMenuButtonClicked);
+            _actionMenuInstance.gameObject.GetComponent<ActionMenu>().UseActionMenuItemButton.onClick.AddListener(OnUseActionMenuButtonClicked);
+        }
+
+        private void OnCloseActionMenuButtonClicked()
+        {
+            _inventoryPresenter.DestroyActionMenu(_actionMenuInstance.gameObject);
+        }
+
+        private void OnUseActionMenuButtonClicked()
+        {
+            _inventoryPresenter.UseItem(_itemToUseInstance);
+            _inventoryPresenter.DestroyActionMenu(_actionMenuInstance.gameObject);
         }
     }
 }

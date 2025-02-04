@@ -1,3 +1,4 @@
+using _Project.Scripts.Character.Model;
 using UnityEngine;
 
 namespace _Project.Scripts.Configs
@@ -8,6 +9,11 @@ namespace _Project.Scripts.Configs
         [field: SerializeField] public string Name { get; private set; }
         [field: SerializeField] public int Weight { get; private set; }
         [field: SerializeField] public int MaxStackValue { get; private set; }
+        [field: SerializeField] public bool IsUsable { get; private set; }
         [field: SerializeField] public Sprite Icon { get; private set; }
+
+        public virtual void UseItemOnCharacter(CharacterModel characterModel)
+        {
+        }
     }
 }

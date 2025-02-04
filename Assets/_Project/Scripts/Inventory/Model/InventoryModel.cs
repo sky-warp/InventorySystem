@@ -40,5 +40,14 @@ namespace _Project.Scripts.Inventory.Model
             _items.Remove(item);
             _inventoryView.ShowCurrentWeight(CurrentWeight);
         }
+
+        public void RemoveStack(Item item, int stackSize)
+        {
+            while (stackSize > 0)
+            {
+                RemoveItem(item);
+                stackSize--;
+            }
+        }
     }
 }

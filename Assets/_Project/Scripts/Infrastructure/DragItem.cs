@@ -60,16 +60,17 @@ namespace _Project.Scripts.Infrastructure
             }
         }
 
-        public void DecreaseStackOnEquip(int valueToDecrease)
+        public void DecreaseStack()
         {
-            StackAmount = 1;
-            
-            _stackText.text = StackAmount.ToString();
-        }
-
-        public void ReturnStackAfterEquip(int stackAmount)
-        {
-            StackAmount = stackAmount - 1;
+            if (StackAmount - 1 > 0)
+            {
+                StackAmount -= 1;
+                _stackText.text = StackAmount.ToString();
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

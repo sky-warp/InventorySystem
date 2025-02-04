@@ -6,13 +6,15 @@ using UnityEngine.EventSystems;
 
 namespace _Project.Scripts.Infrastructure
 {
-    public class DropSlot : MonoBehaviour, IDropHandler
+    public class DropSlot : MonoBehaviour, IDropHandler, IPointerDownHandler
     {
         public event Action<Item> OnDropped;
         public event Action NoFreeSpaceDetected;
         public event Action<DropSlot, PointerEventData> OnSlotFullDetected;
-        
+        public event Action<Transform, DragItem> OnUsableItemClicked;
+
         private InventoryPresenter _presenter_;
+        private DragItem droppedItem;
 
         public void Init(InventoryPresenter presenter)
         {
@@ -21,7 +23,7 @@ namespace _Project.Scripts.Infrastructure
 
         public void OnDrop(PointerEventData eventData)
         {
-            DragItem droppedItem = eventData.pointerDrag.gameObject.GetComponent<DragItem>();
+            droppedItem = eventData.pointerDrag.gameObject.GetComponent<DragItem>();
 
             if (_presenter_.InventoryModel.CurrentWeight + droppedItem.NewItem.Weight >
                 _presenter_.InventoryModel.MaxWeight && !droppedItem.NewItem.IsUsed)
@@ -37,8 +39,7 @@ namespace _Project.Scripts.Infrastructure
                     holdingItem.StackAmount + droppedItem.StackAmount <= holdingItem.NewItem.MaxStackValue)
                 {
                     OnDropped?.Invoke(droppedItem.NewItem);
-
-                    holdingItem.NewItem.StackWeight(droppedItem.NewItem.Weight);
+                    
                     holdingItem.IncreaseStack(droppedItem.StackAmount);
                     Destroy(droppedItem.gameObject);
                 }
@@ -58,6 +59,19 @@ namespace _Project.Scripts.Infrastructure
 
                 droppedItem.transform.SetParent(transform);
                 droppedItem.transform.localPosition = Vector3.zero;
+            }
+        }
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            if (eventData.button == PointerEventData.InputButton.Right)
+            {
+                if (gameObject.transform.childCount > 0)
+                {
+                    var holdingItem = gameObject.GetComponentInChildren<DragItem>();
+                    if (holdingItem.NewItem.IsUsable && holdingItem.NewItem.IsUsed)
+                        OnUsableItemClicked?.Invoke(gameObject.transform, holdingItem);
+                }
             }
         }
     }

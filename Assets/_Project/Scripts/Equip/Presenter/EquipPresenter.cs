@@ -16,10 +16,10 @@ namespace _Project.Scripts.Equip.Presenter
 
         public void EquipItem(string itemName, Transform characterPosition)
         {
-            GameObject itemPrefab = _equipItemsModel.ItemsPrefabs.FirstOrDefault(prefab => prefab.name == itemName);
+            GameObject item = _equipItemsModel.ItemsPrefabs.FirstOrDefault(prefab => prefab.name == itemName);
             
-            GameObject itemInstance = GameObject.Instantiate(itemPrefab, characterPosition);
-            _equipItemsModel.AddEquipItem(itemInstance);
+            GameObject itemPrefab = GameObject.Instantiate(item, characterPosition);
+            _equipItemsModel.AddEquipItem(itemPrefab);
         }
 
         public void DequipItem(string itemName)

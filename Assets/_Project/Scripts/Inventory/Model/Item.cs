@@ -12,11 +12,13 @@ namespace _Project.Scripts.Inventory.Model
         private int _maxStackValue;
         private string _type;
         private string _name;
+        private bool _isUsable;
 
         public int Weight => _weight;
         public int MaxStackValue => _maxStackValue;
         public string Name => _name;
         public string Type => _type;
+        public bool IsUsable => _isUsable;
 
         public Item(ItemConfig congif)
         {
@@ -24,16 +26,12 @@ namespace _Project.Scripts.Inventory.Model
             _maxStackValue = congif.MaxStackValue;
             _name = congif.Name;
             _type = congif.Type;
+            _isUsable = congif.IsUsable;
         }
 
         public void InInventory()
         {
             IsUsed = true;
-        }
-
-        public void StackWeight(int weight)
-        {
-            _weight += weight;
         }
     }
 }

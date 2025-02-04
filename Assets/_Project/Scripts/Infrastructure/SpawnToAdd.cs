@@ -1,4 +1,3 @@
-using _Project.Scripts.Configs;
 using UnityEngine;
 
 namespace _Project.Scripts.Infrastructure

@@ -265,6 +265,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 261288459}
+  - component: {fileID: 261288460}
   m_Layer: 5
   m_Name: Equipment
   m_TagString: Untagged
@@ -295,6 +296,24 @@ RectTransform:
   m_AnchoredPosition: {x: 863.7, y: 95}
   m_SizeDelta: {x: 190, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &261288460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261288458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec33db7b5874535b49a3a251da3a6b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inventoryView: {fileID: 2111634693}
+  _equipSlots:
+  - {fileID: 1322524613}
+  - {fileID: 2047479830}
+  _armorSpawnPoint: {fileID: 1913127427}
+  _weaponSpawnPoint: {fileID: 1389805824}
 --- !u!1 &322465333
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,17 +455,6 @@ Transform:
   - {fileID: 2090674789}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &428350842 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2799142815156945226, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
-  m_PrefabInstance: {fileID: 1922980504}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ec33db7b5874535b49a3a251da3a6b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,8 +1135,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _armorPrefab: {fileID: 2018883125350834264, guid: fbdb53cb5cfe0a2409726adc3151fd53, type: 3}
   _weaponPrefab: {fileID: 2018883125350834264, guid: 1922549d7a596b545a8c3b50fe89f9ed, type: 3}
+  _flaskPrefab: {fileID: 2018883125350834264, guid: 1ec1149ad8752af42bbe5334c3444bef, type: 3}
   _armorParent: {fileID: 2111406420}
   _weaponParent: {fileID: 1115584171}
+  _flaskParent: {fileID: 1557676143}
 --- !u!1 &1115584170
 GameObject:
   m_ObjectHideFlags: 0
@@ -1289,7 +1299,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1151422947}
-  - component: {fileID: 1151422948}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -1317,19 +1326,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -49.99997}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 1, y: 0.5}
---- !u!114 &1151422948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1151422946}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 521128d1125d41aeaa077a95f1df9c99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _healthbarImage: {fileID: 722052348}
 --- !u!1 &1186902732
 GameObject:
   m_ObjectHideFlags: 0
@@ -2042,7 +2038,28 @@ PrefabInstance:
       propertyPath: _equipSlots.Array.data[1]
       value: 
       objectReference: {fileID: 2047479830}
-    m_RemovedComponents: []
+    - target: {fileID: 4452131320561135288, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: _flask
+      value: 
+      objectReference: {fileID: 6320404225979590611, guid: 1ec1149ad8752af42bbe5334c3444bef, type: 3}
+    - target: {fileID: 4452131320561135288, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: _actionMenu
+      value: 
+      objectReference: {fileID: 33531133136045884, guid: 2c2e5a7c9ac22fe44bd54ef60fc2d04d, type: 3}
+    - target: {fileID: 4452131320561135288, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: _healthbarImage
+      value: 
+      objectReference: {fileID: 722052348}
+    - target: {fileID: 4452131320561135288, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: _usableItems.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4452131320561135288, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: _usableItems.Array.data[0]
+      value: 
+      objectReference: {fileID: 6320404225979590611, guid: 1ec1149ad8752af42bbe5334c3444bef, type: 3}
+    m_RemovedComponents:
+    - {fileID: 2799142815156945226, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3927421827543855076, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
@@ -2050,6 +2067,17 @@ PrefabInstance:
       addedObject: {fileID: 1389805824}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+--- !u!114 &1925047487 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4452131320561135288, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+  m_PrefabInstance: {fileID: 1922980504}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 521128d1125d41aeaa077a95f1df9c99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2047479828
 GameObject:
   m_ObjectHideFlags: 0
@@ -2169,8 +2197,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inventoryView: {fileID: 2111634693}
-  _equipView: {fileID: 428350842}
-  _healthbarView: {fileID: 1151422948}
+  _equipView: {fileID: 261288460}
+  characterView: {fileID: 1925047487}
   _characterConfig: {fileID: 11400000, guid: cabf39f15f93ac548a27708d9cb8c781, type: 2}
 --- !u!4 &2062688867
 Transform:
@@ -2488,6 +2516,7 @@ MonoBehaviour:
   _currentWeightText: {fileID: 766448257}
   _maxWeightText: {fileID: 1874985561}
   _noSpaceOject: {fileID: 2325637063479542757}
+  _actionMenu: {fileID: 862004812724363979, guid: 2c2e5a7c9ac22fe44bd54ef60fc2d04d, type: 3}
 --- !u!114 &694769217171284737
 MonoBehaviour:
   m_ObjectHideFlags: 0
