@@ -18,5 +18,5 @@ MonoBehaviour:
   <MaxStackValue>k__BackingField: 1
   <IsUsable>k__BackingField: 1
   <IsUsableOnCharacter>k__BackingField: 0
+  <IsShouldBeUseOnce>k__BackingField: 1
   <Icon>k__BackingField: {fileID: 21300000, guid: 1c82fa18a9230df4f9a0aa981fe3a341, type: 3}
-  <ReadStatus>k__BackingField: 1

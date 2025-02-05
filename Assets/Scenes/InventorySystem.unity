@@ -2517,6 +2517,7 @@ MonoBehaviour:
   _deleteSlot: {fileID: 830826374}
   _currentWeightText: {fileID: 766448257}
   _maxWeightText: {fileID: 1874985561}
+  _alreadyUsedText: {fileID: 7241639602993003683, guid: 78d8948e526375b478a4803e212b0c36, type: 3}
   _noSpaceOject: {fileID: 2325637063479542757}
   _actionMenu: {fileID: 862004812724363979, guid: 2c2e5a7c9ac22fe44bd54ef60fc2d04d, type: 3}
 --- !u!114 &694769217171284737
