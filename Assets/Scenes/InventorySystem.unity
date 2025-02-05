@@ -1136,9 +1136,11 @@ MonoBehaviour:
   _armorPrefab: {fileID: 2018883125350834264, guid: fbdb53cb5cfe0a2409726adc3151fd53, type: 3}
   _weaponPrefab: {fileID: 2018883125350834264, guid: 1922549d7a596b545a8c3b50fe89f9ed, type: 3}
   _flaskPrefab: {fileID: 2018883125350834264, guid: 1ec1149ad8752af42bbe5334c3444bef, type: 3}
+  _bookPrefab: {fileID: 2018883125350834264, guid: c581d39104001b74e832ecb8790de8da, type: 3}
   _armorParent: {fileID: 2111406420}
   _weaponParent: {fileID: 1115584171}
   _flaskParent: {fileID: 1557676143}
+  _bookParent: {fileID: 1541624403}
 --- !u!1 &1115584170
 GameObject:
   m_ObjectHideFlags: 0

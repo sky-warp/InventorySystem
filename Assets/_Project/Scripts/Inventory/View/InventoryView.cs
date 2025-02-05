@@ -14,6 +14,7 @@ namespace _Project.Scripts.Inventory.View
         [SerializeField] private DeleteItem _deleteSlot;
         [SerializeField] private TextMeshProUGUI _currentWeightText;
         [SerializeField] private TextMeshProUGUI _maxWeightText;
+        [SerializeField] private GameObject _alreadyUsedText;
         [SerializeField] private GameObject _noSpaceOject;
         [SerializeField] private ActionMenu _actionMenu;
 
@@ -22,6 +23,7 @@ namespace _Project.Scripts.Inventory.View
         private InventoryPresenter _inventoryPresenter;
         private DragItem _itemToUseInstance;
         private GameObject _actionMenuInstance;
+        private GameObject _alreadyUsedInstance;
 
         public void Init(InventoryPresenter inventoryPresenter)
         {
@@ -123,7 +125,13 @@ namespace _Project.Scripts.Inventory.View
 
         private void OnUseActionMenuButtonClicked()
         {
+            if (_itemToUseInstance.NewItem.IsShouldBeUseOnce && !_itemToUseInstance.NewItem.IsUsingForOnce)
+            {
+                _alreadyUsedInstance = Instantiate(_alreadyUsedText.gameObject, _itemToUseInstance.gameObject.transform);
+            }
+            
             _inventoryPresenter.UseItem(_itemToUseInstance);
+            
             _inventoryPresenter.DestroyActionMenu(_actionMenuInstance.gameObject);
         }
     }

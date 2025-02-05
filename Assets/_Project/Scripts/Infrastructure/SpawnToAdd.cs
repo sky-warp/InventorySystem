@@ -7,10 +7,12 @@ namespace _Project.Scripts.Infrastructure
         [SerializeField] private DragItem _armorPrefab;
         [SerializeField] private DragItem _weaponPrefab;
         [SerializeField] private DragItem _flaskPrefab;
+        [SerializeField] private DragItem _bookPrefab;
         
         [SerializeField] private RectTransform _armorParent;
         [SerializeField] private RectTransform _weaponParent;
         [SerializeField] private RectTransform _flaskParent;
+        [SerializeField] private RectTransform _bookParent;
 
         private void Update()
         {
@@ -27,6 +29,11 @@ namespace _Project.Scripts.Infrastructure
             if (_flaskParent.childCount == 0)
             {
                 Instantiate(_flaskPrefab, _flaskParent);
+            }
+            
+            if (_bookParent.childCount == 0)
+            {
+                Instantiate(_bookPrefab, _bookParent);
             }
         }
     }

@@ -13,7 +13,7 @@ namespace _Project.Scripts.Character.Presenter
         {
             _characterModel = characterModel;
             _inventoryPresenter = inventoryPresenter;
-            _inventoryPresenter.ItemUsed += UseItemOnCharacter;
+            _inventoryPresenter.ItemUsed += UseItem;
         }
 
         public void HealthChange()
@@ -21,14 +21,22 @@ namespace _Project.Scripts.Character.Presenter
             _characterModel.DecreaseHealth();
         }
 
-        public void UseItemOnCharacter(DragItem item)
+        public void UseItem(DragItem item)
         {
-            item.ItemConfig.UseItemOnCharacter(_characterModel);
-
-            if (_characterModel.WasChanged)
+            if (item.NewItem.IsUsableOnCharacter)
             {
-                item.DecreaseStack();
-                _inventoryPresenter.InventoryModel.RemoveItem(item.NewItem);
+                item.ItemConfig.UseItemOnCharacter(_characterModel);
+                
+                if (_characterModel.WasChanged)
+                {
+                    item.DecreaseStack();
+                    _inventoryPresenter.InventoryModel.RemoveItem(item.NewItem);
+                }
+            }
+
+            if (item.NewItem.IsUsable)
+            {
+                item.ItemConfig.UseItem(item.NewItem);
             }
         }
     }

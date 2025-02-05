@@ -17,5 +17,6 @@ MonoBehaviour:
   <Weight>k__BackingField: 1
   <MaxStackValue>k__BackingField: 5
   <IsUsable>k__BackingField: 1
+  <IsUsableOnCharacter>k__BackingField: 1
   <Icon>k__BackingField: {fileID: 21300000, guid: ace8a02646afeda4880fc3cb14cad705, type: 3}
   <HealAmount>k__BackingField: 20
