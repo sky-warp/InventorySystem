@@ -1,5 +1,4 @@
 using System;
-using _Project.Scripts.Inventory.Model;
 using UnityEngine;
 using UnityEngine.EventSystems;
 

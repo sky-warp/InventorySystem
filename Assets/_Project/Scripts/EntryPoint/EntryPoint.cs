@@ -9,7 +9,6 @@ using _Project.Scripts.Inventory.Model;
 using _Project.Scripts.Inventory.Presenter;
 using _Project.Scripts.Inventory.View;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _Project.Scripts.EntryPoint
 {
@@ -17,7 +16,7 @@ namespace _Project.Scripts.EntryPoint
     {
         [SerializeField] private InventoryView _inventoryView;
         [SerializeField] private EquipView _equipView;
-        [FormerlySerializedAs("_healthbarView")] [SerializeField] private CharacterView characterView;
+        [SerializeField] private CharacterView characterView;
         [SerializeField] private CharacterConfig _characterConfig;
         
         private void Start()

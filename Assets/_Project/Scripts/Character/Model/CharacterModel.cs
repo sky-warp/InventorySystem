@@ -1,7 +1,5 @@
 using _Project.Scripts.Character.View;
 using _Project.Scripts.Configs;
-using Unity.VisualScripting;
-using UnityEngine;
 
 namespace _Project.Scripts.Character.Model
 {

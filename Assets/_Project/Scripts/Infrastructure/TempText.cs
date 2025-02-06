@@ -1,11 +1,10 @@
-using System;
 using UnityEngine;
 
 namespace _Project.Scripts.Infrastructure
 {
-    public class FloatText : MonoBehaviour
+    public class TempText : MonoBehaviour
     {
-        [SerializeField] private float _destroyTime = 5f;
+        [SerializeField] private float _destroyTime;
 
         private float elapsedTime = 0f;
 

@@ -23,7 +23,6 @@ namespace _Project.Scripts.Inventory.View
         private InventoryPresenter _inventoryPresenter;
         private DragItem _itemToUseInstance;
         private GameObject _actionMenuInstance;
-        private GameObject _alreadyUsedInstance;
 
         public void Init(InventoryPresenter inventoryPresenter)
         {
@@ -127,7 +126,7 @@ namespace _Project.Scripts.Inventory.View
         {
             if (_itemToUseInstance.NewItem.IsShouldBeUseOnce && !_itemToUseInstance.NewItem.IsUsingForOnce)
             {
-                _alreadyUsedInstance = Instantiate(_alreadyUsedText.gameObject, _itemToUseInstance.gameObject.transform);
+                Instantiate(_alreadyUsedText.gameObject, _itemToUseInstance.gameObject.transform);
             }
             
             _inventoryPresenter.UseItem(_itemToUseInstance);
