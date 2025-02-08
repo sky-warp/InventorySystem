@@ -43,6 +43,17 @@ namespace _Project.Scripts.Inventory.View
             _deleteSlot.OnDeleteDropped += OnDeleteItemDropped;
         }
 
+        public void Dispose()
+        {
+            foreach (var slot in _inventorySlots)
+            {
+                slot.OnDropped -= OnItemDrop;
+                slot.NoFreeSpaceDetected -= ShowNoSpaceDetectedMessage;
+                slot.OnSlotFullDetected -= OnFullDetectedSlotDropped;
+                slot.OnUsableItemClicked -= OnUsableItemClick;
+            }
+        }
+        
         public void ShowMaxWeight(int maxWeight)
         {
             _maxWeightText.text = $"Max weight: {maxWeight}";

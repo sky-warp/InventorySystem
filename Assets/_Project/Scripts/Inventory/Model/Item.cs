@@ -7,34 +7,24 @@ namespace _Project.Scripts.Inventory.Model
     public class Item
     {
         public bool IsUsed { get; private set; }
-
-        private int _weight;
-        private int _maxStackValue;
-        private string _type;
-        private string _name;
-        private bool _isUsable;
-        private bool _isUsableOnCharacter;
-        private bool _isUsingForOnce;
-        private bool _isShouldBeUseOnce;
-
-        public int Weight => _weight;
-        public int MaxStackValue => _maxStackValue;
-        public string Name => _name;
-        public string Type => _type;
-        public bool IsUsable => _isUsable;
-        public bool IsUsableOnCharacter => _isUsableOnCharacter;
-        public bool IsShouldBeUseOnce => _isShouldBeUseOnce;
-        public bool IsUsingForOnce => _isUsingForOnce;
+        public int Weight {get; private set;}
+        public int MaxStackValue {get; private set;}
+        public string Name {get; private set;}
+        public string Type {get; private set;}
+        public bool IsUsable {get; private set;}
+        public bool IsUsableOnCharacter {get; private set;}
+        public bool IsShouldBeUseOnce {get; private set;}
+        public bool IsUsingForOnce {get; private set;}
 
         public Item(ItemConfig congif)
         {
-            _weight = congif.Weight;
-            _maxStackValue = congif.MaxStackValue;
-            _name = congif.Name;
-            _type = congif.Type;
-            _isUsable = congif.IsUsable;
-            _isUsableOnCharacter = congif.IsUsableOnCharacter;
-            _isShouldBeUseOnce = congif.IsShouldBeUseOnce;
+            Weight = congif.Weight;
+            MaxStackValue = congif.MaxStackValue;
+            Name = congif.Name;
+            Type = congif.Type;
+            IsUsable = congif.IsUsable;
+            IsUsableOnCharacter = congif.IsUsableOnCharacter;
+            IsShouldBeUseOnce = congif.IsShouldBeUseOnce;
         }
 
         public void InInventory()
@@ -44,7 +34,7 @@ namespace _Project.Scripts.Inventory.Model
 
         public void ItemWasUsedOnce()
         {
-            _isUsingForOnce = true;
+            IsUsingForOnce = true;
         }
     }
 }

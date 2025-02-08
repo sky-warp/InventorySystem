@@ -2200,7 +2200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inventoryView: {fileID: 2111634693}
   _equipView: {fileID: 261288460}
-  characterView: {fileID: 1925047487}
+  _characterView: {fileID: 1925047487}
   _characterConfig: {fileID: 11400000, guid: cabf39f15f93ac548a27708d9cb8c781, type: 2}
 --- !u!4 &2062688867
 Transform:

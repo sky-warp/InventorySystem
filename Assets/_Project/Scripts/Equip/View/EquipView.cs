@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using _Project.Scripts.Equip.Presenter;
 using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Inventory.View;
@@ -14,7 +15,10 @@ namespace _Project.Scripts.Equip.View
         [SerializeField] private Transform _weaponSpawnPoint;
 
         private EquipPresenter _equipPresenter;
+        private List<GameObject> _itemsPrefabs;
 
+        public List<GameObject> ItemsPrefabs => _itemsPrefabs;
+        
         public void Init(EquipPresenter equipPresenter)
         {
             _equipPresenter = equipPresenter;
@@ -22,6 +26,8 @@ namespace _Project.Scripts.Equip.View
 
         private void Start()
         {
+            _itemsPrefabs = Resources.LoadAll<GameObject>("Items").ToList();
+            
             foreach (EquipSlot equipSlot in _equipSlots)
             {
                 equipSlot.OnEquipped += OnSlotEquipped;
@@ -30,6 +36,16 @@ namespace _Project.Scripts.Equip.View
             }
         }
 
+        public void Dispose()
+        {
+            foreach (EquipSlot equipSlot in _equipSlots)
+            {
+                equipSlot.OnEquipped -= OnSlotEquipped;
+                equipSlot.OnDequipped -= FromSlotRemoved;
+                equipSlot.OnItemBackToInventory -= OnFreeSlotPut;
+            }
+        }
+        
         private void OnSlotEquipped(string itemType, string itemName)
         {
             Transform spawnPoint = (itemType == "Armor") ? _armorSpawnPoint : _weaponSpawnPoint;
@@ -58,6 +74,11 @@ namespace _Project.Scripts.Equip.View
         private void OnFreeSlotPut(GameObject itemToReturnToInventory)
         {
             _equipPresenter.ReturnToFreeSlot(GetRandomSlot(), itemToReturnToInventory);
+        }
+
+        public void DestroyEquipedItem(GameObject instanceToDelete)
+        {
+            Destroy(instanceToDelete);
         }
     }
 }

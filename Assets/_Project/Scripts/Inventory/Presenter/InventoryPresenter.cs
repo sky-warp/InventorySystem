@@ -1,6 +1,7 @@
 using System;
 using _Project.Scripts.Infrastructure;
 using _Project.Scripts.Inventory.Model;
+using _Project.Scripts.Inventory.View;
 using UnityEngine;
 
 namespace _Project.Scripts.Inventory.Presenter
@@ -10,14 +11,24 @@ namespace _Project.Scripts.Inventory.Presenter
         public Action<DragItem> ItemUsed;
         
         private InventoryModel _inventoryModel;
+        private InventoryView _inventoryView;
         private GameObject _currentActionMenu;
         public InventoryModel InventoryModel => _inventoryModel;
 
-        public InventoryPresenter(InventoryModel inventoryModel)
+        public InventoryPresenter(InventoryModel inventoryModel, InventoryView inventoryView)
         {
             _inventoryModel = inventoryModel;
+            _inventoryView = inventoryView;
+            
+            _inventoryView.ShowMaxWeight(_inventoryModel.MaxWeight);
+            _inventoryModel.OnCurrentWeightChanged += OnCurrentWeightChange;
         }
 
+        public void Dispose()
+        {
+            _inventoryModel.OnCurrentWeightChanged -= OnCurrentWeightChange;
+        }
+        
         public void AddItemToInventory(Item item)
         {
             if (item.IsUsed)
@@ -50,6 +61,11 @@ namespace _Project.Scripts.Inventory.Presenter
         public void UseItem(DragItem itemToUse)
         {
             ItemUsed?.Invoke(itemToUse);
+        }
+        
+        private void OnCurrentWeightChange(int currentWeight)
+        {
+            _inventoryView.ShowCurrentWeight(currentWeight);
         }
     }
 }

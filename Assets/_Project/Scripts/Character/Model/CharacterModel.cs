@@ -1,40 +1,46 @@
-using _Project.Scripts.Character.View;
+using System;
 using _Project.Scripts.Configs;
 
 namespace _Project.Scripts.Character.Model
 {
     public class CharacterModel
     {
+        public Action<int, int> OnHealthChanged;
+        
         public bool WasChanged { get; private set; }
         
         private Character _character;
-        private CharacterView _characterView;
         private int _maxHealth;
+        private int _currentHealth;
+        private readonly int _damageToDecrease = 20;
         
-        public CharacterModel(CharacterView characterView, CharacterConfig data)
+        public CharacterModel(CharacterConfig data)
         {
             _character = new Character(data);
-            _characterView = characterView;
-            _maxHealth = data.Health;
+            _maxHealth = _character.MaxHealth;
+            _currentHealth = _maxHealth;
         }
 
         public void DecreaseHealth()
         {
-            _character.TakeDamage(20);
+            if(_currentHealth - _damageToDecrease >= 0)
+                _currentHealth -= _damageToDecrease;
+            else
+                _currentHealth = 0;
 
-            _characterView.ShowHealth(_character.Health, _maxHealth);
+            OnHealthChanged?.Invoke(_currentHealth, _maxHealth);
         }
 
         public void IncreaseHealth(int healthIncrease)
         {
-            if (_character.Health == _maxHealth)
+            if (_currentHealth == _maxHealth)
             {
                 WasChanged = false;
                 return;
             }
             
-            _character.Heal(healthIncrease);
-            _characterView.ShowHealth(_character.Health, _maxHealth);
+            _currentHealth += healthIncrease;
+            OnHealthChanged?.Invoke(_currentHealth, _maxHealth);
             WasChanged = true;
         }
     }

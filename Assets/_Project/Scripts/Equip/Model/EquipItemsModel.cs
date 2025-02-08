@@ -1,15 +1,12 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace _Project.Scripts.Equip.Model
 {
     public class EquipItemsModel
     {
-        private List<GameObject> _itemsPrefabs = Resources.LoadAll<GameObject>("Items").ToList();
         private List<GameObject> _characterEquipItems = new();
         
-        public List<GameObject> ItemsPrefabs => _itemsPrefabs;
         public List<GameObject> CharacterEquipItems => _characterEquipItems;
 
         public void AddEquipItem(GameObject item)

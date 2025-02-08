@@ -16,22 +16,33 @@ namespace _Project.Scripts.EntryPoint
     {
         [SerializeField] private InventoryView _inventoryView;
         [SerializeField] private EquipView _equipView;
-        [SerializeField] private CharacterView characterView;
+        [SerializeField] private CharacterView _characterView;
         [SerializeField] private CharacterConfig _characterConfig;
+
+        private CharacterPresenter _characterPresenter;
+        private InventoryPresenter _inventoryPresenter;
         
         private void Start()
         {
-            InventoryModel model = new InventoryModel(_inventoryView);
-            InventoryPresenter presenter = new InventoryPresenter(model);
-            _inventoryView.Init(presenter);
+            InventoryModel model = new InventoryModel();
+            _inventoryPresenter = new InventoryPresenter(model, _inventoryView);
+            _inventoryView.Init(_inventoryPresenter);
 
             EquipItemsModel equipItemsModel = new();
-            EquipPresenter equipPresenter = new EquipPresenter(equipItemsModel);
+            EquipPresenter equipPresenter = new EquipPresenter(equipItemsModel, _equipView);
             _equipView.Init(equipPresenter);
             
-            CharacterModel characterModel = new CharacterModel(characterView, _characterConfig);
-            CharacterPresenter characterPresenter = new CharacterPresenter(characterModel, presenter);
-            characterView.Init(characterPresenter);
+            CharacterModel characterModel = new CharacterModel(_characterConfig);
+            _characterPresenter = new CharacterPresenter(characterModel, _characterView, _inventoryPresenter);
+            _characterView.Init(_characterPresenter);
+        }
+
+        private void OnDestroy()
+        {
+            _characterPresenter.Dispose();
+            _inventoryPresenter.Dispose();
+            _equipView.Dispose();
+            _inventoryView.Dispose();
         }
     }
 }

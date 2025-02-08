@@ -31,7 +31,7 @@ namespace _Project.Scripts.Infrastructure
         {
             var droppedItem = eventData.pointerDrag.gameObject.GetComponent<DragItem>();
 
-            if (droppedItem.NewItem.IsUsed && droppedItem.NewItem.Type == _itemType)
+            if (droppedItem.NewItem.IsUsed && droppedItem.NewItem.Type == _itemType && droppedItem.StackAmount == 1)
             {
                 if (gameObject.transform.childCount > 0)
                 {
